@@ -1,0 +1,58 @@
+const Discord = require('discord.js');
+const client = new Discord.Client();
+
+
+client.on("message", function(message) {
+
+    if(message.content === "!ticket"){
+        var random = `${Math.floor(Math.random() * Math.floor(10))}`  +  `${Math.floor(Math.random() * Math.floor(10))}` +  `${Math.floor(Math.random() * Math.floor(10))}` +  `${Math.floor(Math.random() * Math.floor(10))}` +  `${Math.floor(Math.random() * Math.floor(10))}` +  `${Math.floor(Math.random() * Math.floor(10))}` ;
+
+    
+        var chan = message.guild.createChannel(`ticket - ${random}`, {
+            parent: "684700991135678465",
+            type: 'text',
+            permissionOverwrites: [
+                {
+                    id: message.guild.id,
+                    deny: ['VIEW_CHANNEL'],
+                },
+                {
+                    id: message.author.id,
+                    allow: ['VIEW_CHANNEL'],
+                },
+            ]
+            
+        })
+        .then(chan => chan.send('<@' + message.member.id + ">" + ' Tu peux exposer ton problème ici au ' + "<@&684689490702630990>" + " Merci de faire \"!ticket close\" lorsque ton problème est regler"))
+        console.log(chan)
+
+    }
+
+    if(message.channel.name.startsWith('ticket')){
+        if(message.content === '!ticket close'){
+            message.channel.delete()
+        }
+    }
+
+    ajd = `${message.createdAt}`
+    m = message
+
+    if(!message.member.roles.find(r => r.name === "Membre - Discord") && !message.member.roles.find(r => r.name === "【🔻】• Bot")){
+        if(message.content === rep){
+            console.log(message.member)
+            var usere = message.member.user;
+
+            var list = client.guilds.get("684688751762472962"); 
+
+            var u = list.members.find('id', message.member.user.id)
+                    
+            var mute = message.guild.roles.find('name', `Membre - Discord`);
+            u.addRole(mute)
+
+        }else{
+            message.channel.send('Vous vous êtes trompé veuillez réessayer')
+        }
+    }
+})
+
+client.login(TOKEN)
