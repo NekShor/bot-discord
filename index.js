@@ -3308,7 +3308,7 @@ client.on("error", function (error) {
 
 
 
-client.login("Njg0NzYzMjI5NTgyMzkzMzQ1.Xl-1kw.3v_AvztDeTmifbz20QCwP6KB30A")
+client.login(Token")
 
 
 
