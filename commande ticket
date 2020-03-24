@@ -1,15 +1,19 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
+//Faite !ticket et un channel se crééra auquel seulement vous et les modérateur auront accès
+//Cela permet de les contacter en cas de problèmes
 
 client.on("message", function(message) {
 
     if(message.content === "!ticket"){
         var random = `${Math.floor(Math.random() * Math.floor(10))}`  +  `${Math.floor(Math.random() * Math.floor(10))}` +  `${Math.floor(Math.random() * Math.floor(10))}` +  `${Math.floor(Math.random() * Math.floor(10))}` +  `${Math.floor(Math.random() * Math.floor(10))}` +  `${Math.floor(Math.random() * Math.floor(10))}` ;
 
+        var modoid = ""//Mettez l'id du rôle modérateur
+        var parentid = ""//Mettez l'id de la catégorie souhaité
     
         var chan = message.guild.createChannel(`ticket - ${random}`, {
-            parent: "684700991135678465",
+            parent: parentid,
             type: 'text',
             permissionOverwrites: [
                 {
@@ -23,7 +27,7 @@ client.on("message", function(message) {
             ]
             
         })
-        .then(chan => chan.send('<@' + message.member.id + ">" + ' Tu peux exposer ton problème ici au ' + "<@&684689490702630990>" + " Merci de faire \"!ticket close\" lorsque ton problème est regler"))
+        .then(chan => chan.send('<@' + message.member.id + ">" + ' Tu peux exposer ton problème ici au ' + "<@&" + modoid + ">" + " Merci de faire \"!ticket close\" lorsque ton problème est regler"))
         console.log(chan)
 
     }
@@ -34,25 +38,6 @@ client.on("message", function(message) {
         }
     }
 
-    ajd = `${message.createdAt}`
-    m = message
-
-    if(!message.member.roles.find(r => r.name === "Membre - Discord") && !message.member.roles.find(r => r.name === "【🔻】• Bot")){
-        if(message.content === rep){
-            console.log(message.member)
-            var usere = message.member.user;
-
-            var list = client.guilds.get("684688751762472962"); 
-
-            var u = list.members.find('id', message.member.user.id)
-                    
-            var mute = message.guild.roles.find('name', `Membre - Discord`);
-            u.addRole(mute)
-
-        }else{
-            message.channel.send('Vous vous êtes trompé veuillez réessayer')
-        }
-    }
 })
 
 client.login(TOKEN)
